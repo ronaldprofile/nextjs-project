@@ -6,6 +6,11 @@ const nextConfig = {
         hostname: 'api-logista.s3.amazonaws.com'
       }
     ]
+  },
+  logging: {
+    fetches: {
+      fullUrl: true
+    }
   }
 }
 

@@ -5,4 +5,4 @@ async function getSite() {
   return response.data
 }
 
-export const siteServices = { getSite }
+export const siteService = { getSite }

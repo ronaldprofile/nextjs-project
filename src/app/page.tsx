@@ -1,19 +1,11 @@
 import { Metadata, ResolvingMetadata } from 'next'
 import Image from 'next/image'
-import { siteServices } from '@/services/get-site'
 import { Suspense } from 'react'
 import Loading from './loading'
+import { siteService } from '@/domain/site/siteService'
 
-type Props = {
-  params: { id: string }
-  searchParams: { [key: string]: string | string[] | undefined }
-}
-
-export async function generateMetadata(
-  _props: Props,
-  _parent: ResolvingMetadata
-): Promise<Metadata> {
-  const data = await siteServices.getSite()
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await siteService.getSite()
 
   return {
     title: data.site_settings.site_name,
@@ -25,7 +17,7 @@ export async function generateMetadata(
 }
 
 export default async function Home() {
-  const site = await siteServices.getSite()
+  const site = await siteService.getSite()
 
   return (
     <Suspense fallback={<Loading />}>
