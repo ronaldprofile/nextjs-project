@@ -1,4 +1,4 @@
-import { managementService } from '@/domain/managment/managmentService'
+import { managementService } from '@/app/domain/managment/managmentService'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(

@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import Loading from './loading'
-import { siteService } from '@/domain/site/siteService'
+import { siteService } from '@/app/domain/site/siteService'
 import { NEXT_BASE_API_URL } from '@/api/apiConfig'
 
 export async function generateMetadata(): Promise<Metadata> {

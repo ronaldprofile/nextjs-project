@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = process.env.GEST_API_BASE_URL
+const BASE_URL = process.env.NEXT_PUBLIC_GEST_API_BASE_URL
 
 type GetResult = {
   name_store: string
