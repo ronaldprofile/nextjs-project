@@ -1,9 +1,9 @@
-import { Metadata, ResolvingMetadata } from 'next'
+import { Metadata } from 'next'
 import Image from 'next/image'
 import { Suspense } from 'react'
 import Loading from './loading'
 import { siteService } from '@/domain/site/siteService'
-import { nextApiUrl } from '@/api/apiConfig'
+// import { nextApiUrl } from '@/api/apiConfig'
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await siteService.getSite()
@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const response = await fetch(`${nextApiUrl}/api/client`)
+  const response = await fetch(`/api/client`)
 
   const site = await response.json()
 

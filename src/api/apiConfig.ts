@@ -20,7 +20,7 @@ api.interceptors.request.use(async config => {
     config.baseURL = subdomainStorage
     return config
   } else {
-    const response = await axios.get(`${nextApiUrl}/api/managment/${subdomain}`)
+    const response = await axios.get(`/api/managment/${subdomain}`)
 
     const data = response.data
     const clientStore = data.result
