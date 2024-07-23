@@ -1,7 +1,7 @@
 import { managementService } from '@/domain/managment/managmentService'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET(
+export default async function GET(
   req: NextRequest,
   { params }: { params: { store: string } }
 ) {
