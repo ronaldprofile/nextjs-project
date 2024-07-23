@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL
-})
-
 export const NEXT_BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL
+
+export const api = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_COMERCIAL_API
+})
 
 api.interceptors.request.use(async config => {
   const subdomain = config.params.store
