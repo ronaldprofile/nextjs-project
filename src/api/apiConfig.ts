@@ -4,6 +4,9 @@ export const api = axios.create({
   baseURL: process.env.API_URL
 })
 
+export const nextApiUrl =
+  process.env.NODE_ENV === 'development' ? process.env.BASE_URL : ''
+
 api.interceptors.request.use(async config => {
   const subdomain = config.params.store
 
@@ -17,18 +20,15 @@ api.interceptors.request.use(async config => {
     config.baseURL = subdomainStorage
     return config
   } else {
-    const response = await axios.get(
-      `http://localhost:3000/api/managment/${subdomain}`
-    )
+    const response = await axios.get(`${nextApiUrl}/api/managment/${subdomain}`)
 
     const data = response.data
-
     const clientStore = data.result
 
-    if (!clientStore) {
-      // localStorage.removeItem(storageKey)
-      // localStorage.removeItem('@App:company:name')
-    }
+    // if (!clientStore) {
+    //   localStorage.removeItem(storageKey)
+    //   localStorage.removeItem('@App:company:name')
+    // }
 
     if (clientStore) {
       // localStorage.setItem(storageKey, clientStore.url_path)

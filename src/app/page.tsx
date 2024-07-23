@@ -3,23 +3,22 @@ import Image from 'next/image'
 import { Suspense } from 'react'
 import Loading from './loading'
 import { siteService } from '@/domain/site/siteService'
+import { nextApiUrl } from '@/api/apiConfig'
 
-// export async function generateMetadata(): Promise<Metadata> {
-//   const data = await siteService.getSite()
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await siteService.getSite()
 
-//   return {
-//     title: data.site_settings.site_name,
-//     description: data.site.description,
-//     icons: {
-//       icon: data.site_settings.image
-//     }
-//   }
-// }
+  return {
+    title: data.site_settings.site_name,
+    description: data.site.description,
+    icons: {
+      icon: data.site_settings.image
+    }
+  }
+}
 
 export default async function Home() {
-  const response = await fetch('http://localhost:3000/api/client', {
-    cache: 'no-cache'
-  })
+  const response = await fetch(`${nextApiUrl}/api/client`)
 
   const site = await response.json()
 
