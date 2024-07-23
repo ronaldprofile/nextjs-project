@@ -16,7 +16,8 @@ export function RootContextProvider({
   async function getClientStore() {
     if (checkWindowIsAvailable()) {
       const url = window.location.host
-      const subdomain = url.split('.')[0]
+      // const subdomain = url.split('.')[0]
+      const subdomain = 'comercial'
 
       const storageKey = `@App:company-info-${subdomain}`
       const subdomainStorage = localStorage.getItem(storageKey)

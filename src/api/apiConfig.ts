@@ -1,3 +1,4 @@
+import { checkWindowIsAvailable } from '@/utils'
 import axios from 'axios'
 
 export const api = axios.create({
@@ -5,7 +6,7 @@ export const api = axios.create({
 })
 
 api.interceptors.request.use(config => {
-  if (typeof window !== 'undefined') {
+  if (checkWindowIsAvailable()) {
     console.log('interceptor request')
     console.log(window.location.host)
   }
