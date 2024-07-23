@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Suspense } from 'react'
 import Loading from './loading'
 import { siteService } from '@/domain/site/siteService'
-// import { nextApiUrl } from '@/api/apiConfig'
+import { NEXT_BASE_API_URL } from '@/api/apiConfig'
 
 export async function generateMetadata(): Promise<Metadata> {
   const data = await siteService.getSite()
@@ -18,8 +18,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const response = await fetch(`/api/client`)
+  if (!NEXT_BASE_API_URL) return null
 
+  const response = await fetch(`${NEXT_BASE_API_URL}/api/client`)
   const site = await response.json()
 
   return (

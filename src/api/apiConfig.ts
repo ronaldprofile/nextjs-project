@@ -4,8 +4,7 @@ export const api = axios.create({
   baseURL: process.env.API_URL
 })
 
-export const nextApiUrl =
-  process.env.NODE_ENV === 'development' ? process.env.BASE_URL : ''
+export const NEXT_BASE_API_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 api.interceptors.request.use(async config => {
   const subdomain = config.params.store
@@ -20,9 +19,11 @@ api.interceptors.request.use(async config => {
     config.baseURL = subdomainStorage
     return config
   } else {
-    const response = await axios.get(`/api/managment/${subdomain}`)
+    const response = await fetch(
+      `${NEXT_BASE_API_URL}/api/managment/${subdomain}`
+    )
 
-    const data = response.data
+    const data = await response.json()
     const clientStore = data.result
 
     // if (!clientStore) {
