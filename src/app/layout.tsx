@@ -11,9 +11,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='pt-br' className='bg-zinc-700'>
-      <RootContextProvider>
-        <body className={inter.className}>{children}</body>
-      </RootContextProvider>
+      {/* <RootContextProvider> */}
+      <body className={inter.className}>{children}</body>
+      {/* </RootContextProvider> */}
     </html>
   )
 }

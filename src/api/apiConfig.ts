@@ -3,7 +3,7 @@ import axios from 'axios'
 export const NEXT_BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL
 
 export const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_COMERCIAL_API
+  baseURL: process.env.NEXT_PUBLIC_STORER_API
 })
 
 api.interceptors.request.use(async config => {
