@@ -27,7 +27,7 @@ export default function Home() {
       {site && (
         <div className='max-w-7xl mx-auto'>
           <header className='py-4 px-6 flex items-center justify-between'>
-            <h1 className='text-white text-2xl'>
+            <h1 className='text-black text-2xl'>
               {site.site_settings.site_name}
             </h1>
 
