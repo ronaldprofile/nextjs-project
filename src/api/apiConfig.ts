@@ -1,44 +1,41 @@
+import { managementService } from '@/app/domain/managment/managmentService'
 import axios from 'axios'
-
-export const NEXT_BASE_API_URL = process.env.NEXT_PUBLIC_BASE_API_URL
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_STORER_API
 })
 
-api.interceptors.request.use(async config => {
-  const subdomain = config.params.store
+api.interceptors.request.use(
+  async config => {
+    const url = window.location.host
+    const subdomain = url.split('.')[0]
 
-  const storageKey = `@App:company-info-${subdomain}`
-  // const subdomainStorage = localStorage.getItem(storageKey)
-  const subdomainStorage = false
+    const storageKey = `@App:company-info-${subdomain}`
 
-  if (subdomainStorage) {
-    console.log('já existe')
+    const subdomainStorage = localStorage.getItem(storageKey)
 
-    config.baseURL = subdomainStorage
-    return config
-  } else {
-    const response = await fetch(
-      `${NEXT_BASE_API_URL}/api/managment/${subdomain}`
-    )
-
-    const data = await response.json()
-    const clientStore = data.result
-
-    // if (!clientStore) {
-    //   localStorage.removeItem(storageKey)
-    //   localStorage.removeItem('@App:company:name')
-    // }
-
-    if (clientStore) {
-      // localStorage.setItem(storageKey, clientStore.url_path)
-      // localStorage.setItem('@App:company:name', subdomain)
-
-      config.baseURL = clientStore.url_path
+    if (subdomainStorage) {
+      config.baseURL = subdomainStorage
       return config
-    }
-  }
+    } else {
+      const company = await managementService.getStore(subdomain)
 
-  return config
-})
+      if (company.result) {
+        localStorage.setItem(storageKey, company.result.url_path)
+        localStorage.setItem('@App:company', subdomain)
+
+        config.baseURL = company.result.url_path
+        return config
+      } else {
+        window.location.href = '/_not-found'
+        localStorage.removeItem(storageKey)
+        localStorage.removeItem('@App:company')
+      }
+    }
+
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+)

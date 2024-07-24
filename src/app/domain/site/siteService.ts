@@ -1,11 +1,7 @@
 import { api } from '@/api/apiConfig'
 
-async function getSite(store?: string) {
-  const response = await api.get('sites/api/resume-file', {
-    params: {
-      store
-    }
-  })
+async function getSite() {
+  const response = await api.get('/sites/api/resume-file')
   return response.data
 }
 

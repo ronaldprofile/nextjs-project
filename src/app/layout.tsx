@@ -1,4 +1,3 @@
-import { RootContextProvider } from '@/app/context/RootContext'
 import { Inter } from 'next/font/google'
 import './globals.css'
 
@@ -10,10 +9,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='pt-br' className='bg-zinc-700'>
-      {/* <RootContextProvider> */}
+    <html lang='pt-br'>
       <body className={inter.className}>{children}</body>
-      {/* </RootContextProvider> */}
     </html>
   )
 }
