@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { redirect } from 'next/navigation'
+
 export async function GET(
   req: NextRequest,
   { params }: { params: { page: string } }
@@ -14,9 +14,9 @@ export async function GET(
     { cache: 'no-cache' }
   )
 
-  // if (true) {
-  //   return NextResponse.redirect(new URL('/_not-found', req.nextUrl))
-  // }
+  if (!response.ok) {
+    return NextResponse.json({ message: 'page not found' }, { status: 404 })
+  }
 
   const data = await response.json()
 
