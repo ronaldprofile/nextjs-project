@@ -12,7 +12,7 @@ export function Draft() {
   async function getStoreSite() {
     try {
       setLoading(true)
-      const data = await siteService.getSite()
+      const data = await siteService.getResumeSite()
       if (data) {
         setData(data)
       }
@@ -32,8 +32,6 @@ export function Draft() {
         <p>Loading...</p>
       </>
     )
-
-  console.log(data)
 
   return (
     <>
