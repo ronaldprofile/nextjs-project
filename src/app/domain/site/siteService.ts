@@ -1,10 +1,23 @@
 import { api } from '@/api/apiConfig'
-import { SitePage } from './siteTypes'
+import { GetListPage, SitePage } from './siteTypes'
 import { redirect } from 'next/navigation'
 
 async function getResumeSite() {
   const response = await api.get('/sites/api/resume-file')
   return response.data
+}
+
+async function getListPage(): Promise<GetListPage[]> {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_HOST}/api/site/list_pages`
+  )
+
+  if (!response.ok) {
+    return redirect('/_not-found')
+  }
+
+  const data = await response.json()
+  return data
 }
 
 async function getSitePage(page: string): Promise<SitePage> {
@@ -23,4 +36,4 @@ async function getSitePage(page: string): Promise<SitePage> {
   return data
 }
 
-export const siteService = { getResumeSite, getSitePage }
+export const siteService = { getResumeSite, getSitePage, getListPage }

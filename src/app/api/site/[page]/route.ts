@@ -5,7 +5,6 @@ export async function GET(
   { params }: { params: { page: string } }
 ) {
   const store = req.nextUrl.host.split('.')[0]
-  // console.log(url)
 
   // const store = 'storer'
   const page = params.page

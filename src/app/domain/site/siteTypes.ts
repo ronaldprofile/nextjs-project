@@ -50,3 +50,9 @@ export interface SiteSectionComponent {
   updated_at: string
   section: number
 }
+
+export interface GetListPage {
+  id: number
+  title: string
+  url: string
+}

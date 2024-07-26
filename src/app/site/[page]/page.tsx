@@ -2,10 +2,19 @@ import { Metadata, ResolvingMetadata } from 'next'
 import { Suspense } from 'react'
 import Loading from '../../loading'
 import { siteService } from '@/app/domain/site'
+import Link from 'next/link'
 
 type Props = {
   params: { page: string }
   searchParams: { [key: string]: string | string[] | undefined }
+}
+
+export async function generateStaticParams() {
+  const pages = await siteService.getListPage()
+
+  return pages.map(({ url }) => ({
+    page: url
+  }))
 }
 
 export async function generateMetadata(
@@ -24,8 +33,10 @@ export default async function SitePage({ params }: Props) {
 
   return (
     <Suspense fallback={<Loading />}>
-      <div>
-        <h1 className='text-3xl'>
+      <div className='m-10'>
+        <Link href='/'>Voltar</Link>
+
+        <h1 className='mt-3 text-3xl'>
           Dynamic page:
           <span className='text-purple-500'>{data.title}</span>
         </h1>
