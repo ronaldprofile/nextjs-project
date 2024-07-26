@@ -8,7 +8,8 @@ export const api = axios.create({
 api.interceptors.request.use(
   async config => {
     const url = window.location.host
-    const subdomain = url.split('.')[0]
+    // const subdomain = url.split('.')[0]
+    const subdomain = 'storer'
 
     const storageKey = `@App:company-info-${subdomain}`
 

@@ -1,45 +1,23 @@
-'use client'
-import { Suspense, useEffect, useState } from 'react'
-import Image from 'next/image'
+import { Suspense } from 'react'
 import Loading from './loading'
-import { siteService } from '@/app/domain/site/siteService'
+import { Draft } from '@/components/Draft'
+import { Metadata } from 'next'
+import { siteService } from './domain/site'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await siteService.getSitePage('home')
+
+  return {
+    title: data.title
+  }
+}
 
 export default function Home() {
-  const [site, setSite] = useState<any>()
-
-  async function getStoreSite() {
-    try {
-      const data = await siteService.getSite()
-      if (data) {
-        setSite(data)
-      }
-    } catch (error) {
-    } finally {
-    }
-  }
-
-  useEffect(() => {
-    getStoreSite()
-  }, [])
-
   return (
-    <Suspense fallback={<Loading />}>
-      {site && (
-        <div className='max-w-7xl mx-auto'>
-          <header className='py-4 px-6 flex items-center justify-between'>
-            <h1 className='text-black text-2xl'>
-              {site.site_settings.site_name}
-            </h1>
-
-            <Image
-              src={site.site_settings?.logo}
-              alt=''
-              width={200}
-              height={100}
-            />
-          </header>
-        </div>
-      )}
-    </Suspense>
+    <>
+      <Suspense fallback={<Loading />}>
+        <Draft />
+      </Suspense>
+    </>
   )
 }
