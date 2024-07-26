@@ -12,9 +12,13 @@ type Props = {
 export async function generateStaticParams() {
   const pages = await siteService.getListPage()
 
-  return pages.map(({ url }) => ({
-    page: url
-  }))
+  console.log(pages)
+
+  // return pages.map(({ url }) => ({
+  //   page: url
+  // }))
+
+  return [{ page: 'home' }, { page: 'teste' }]
 }
 
 export async function generateMetadata(

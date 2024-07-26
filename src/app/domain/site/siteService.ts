@@ -9,12 +9,12 @@ async function getResumeSite() {
 
 async function getListPage(): Promise<GetListPage[]> {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_HOST}/api/site/list_pages`
+    `${process.env.NEXT_PUBLIC_APP_HOST}/api/site_list_pages`
   )
 
-  if (!response.ok) {
-    return redirect('/_not-found')
-  }
+  // if (!response.ok) {
+  //   return redirect('/_not-found')
+  // }
 
   const data = await response.json()
   return data
