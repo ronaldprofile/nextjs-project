@@ -8,9 +8,12 @@ async function getResumeSite() {
 }
 
 async function getSitePage(page: string): Promise<SitePage> {
-  const response = await fetch(`http://localhost:3000/api/site/${page}`, {
-    cache: 'no-cache'
-  })
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_HOST}/api/site/${page}`,
+    {
+      cache: 'no-cache'
+    }
+  )
 
   if (!response.ok) {
     return redirect('/_not-found')

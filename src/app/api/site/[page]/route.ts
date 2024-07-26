@@ -4,9 +4,10 @@ export async function GET(
   req: NextRequest,
   { params }: { params: { page: string } }
 ) {
-  // const url = req.nextUrl.host
+  const store = req.nextUrl.host.split('.')[0]
+  // console.log(url)
 
-  const store = 'storer'
+  // const store = 'storer'
   const page = params.page
 
   const response = await fetch(
