@@ -9,7 +9,7 @@ const nextConfig = {
   },
   logging: {
     fetches: {
-      fullUrl: true
+      // fullUrl: true
     }
   }
 }
