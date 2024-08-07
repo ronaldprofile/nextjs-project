@@ -7,10 +7,8 @@ async function getResumeSite() {
   return response.data
 }
 
-async function getListPage(): Promise<GetListPage[]> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_HOST}/api/site_list_pages`
-  )
+async function getListPage(url: string): Promise<GetListPage[]> {
+  const response = await fetch(`${url}api/site_list_pages`)
 
   // if (!response.ok) {
   //   return redirect('/_not-found')
@@ -20,13 +18,10 @@ async function getListPage(): Promise<GetListPage[]> {
   return data
 }
 
-async function getSitePage(page: string): Promise<SitePage> {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_APP_HOST}/api/site/${page}`,
-    {
-      cache: 'no-cache'
-    }
-  )
+async function getSitePage(url: string, page: string): Promise<SitePage> {
+  const response = await fetch(`${url}api/site/${page}`, {
+    cache: 'no-cache'
+  })
 
   if (!response.ok) {
     return redirect('/_not-found')
